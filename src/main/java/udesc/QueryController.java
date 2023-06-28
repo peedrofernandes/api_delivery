@@ -1,4 +1,5 @@
 package udesc;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -8,16 +9,13 @@ import java.sql.Statement;
 import udesc.data.EstabelecimentoData;
 import udesc.data.PedidoData;
 
-public class QueryController 
-{
+public class QueryController {
   private Connection connection;
 
-  private String executeQuery(String query) 
-  {
+  private String executeQuery(String query) {
     String result = "";
 
-    try 
-    {
+    try {
       Statement statement = connection.createStatement();
       ResultSet r = statement.executeQuery(query);
 
@@ -31,9 +29,7 @@ public class QueryController
         result += "\n";
       }
 
-    } 
-    catch (SQLException exc) 
-    {
+    } catch (SQLException exc) {
       exc.printStackTrace();
       System.exit(1);
     }
@@ -41,13 +37,11 @@ public class QueryController
     return result;
   }
 
-  public QueryController(Connection connection) 
-  {
+  public QueryController(Connection connection) {
     this.connection = connection;
   }
 
-  public void inserirPedido(PedidoData dados) 
-  {
+  public void inserirPedido(PedidoData dados) {
     String comandoInsercao = "insert into pedido (id_pedido, valor_final, taxa_de_entrega, status, observacao, cpf, cod_metodo) values ((select max(id_pedido) from pedido) + 1, ?, ?, ?, ?, ?, ?)";
 
     try {
@@ -66,9 +60,8 @@ public class QueryController
       System.exit(1);
     }
   }
-  
-  public void inserirEstabelecimento(EstabelecimentoData dados)
-  {
+
+  public void inserirEstabelecimento(EstabelecimentoData dados) {
     String comandoInsercao = "INSERT INTO estabelecimento (cnpj, nome, cpf, rua, bairro, cidade) VALUES (?, ?, ?, ?, ?, ?)";
 
     try {
@@ -107,27 +100,25 @@ public class QueryController
   }
 
   public void pedidoMaisCaro(String cnpj) {
-    String query = 
-    "select p.id_pedido, p.valor_final from pedido p" +
-    "where p.valor_final in (" +
-      "select max(p.valor_final) from pedido p" +
-      "join pedido_refeicao pr on pr.id_pedido = p.id_pedido" +
-      "join refeicao r on r.id_refeicao = pr.id_refeicao" +
-      "join estabelecimento e on e.cnpj = r.cnpj" +
-      "where e.cnpj = '" + cnpj + "'" +
-    ")";
+    String query = "select p.id_pedido, p.valor_final from pedido p" +
+        "where p.valor_final in (" +
+        "select max(p.valor_final) from pedido p" +
+        "join pedido_refeicao pr on pr.id_pedido = p.id_pedido" +
+        "join refeicao r on r.id_refeicao = pr.id_refeicao" +
+        "join estabelecimento e on e.cnpj = r.cnpj" +
+        "where e.cnpj = '" + cnpj + "'" +
+        ")";
     String result = this.executeQuery(query);
     System.out.println("------ Pedido mais caro do estabelecimento '" + cnpj + "' ------");
     System.out.println(result);
   }
-  
+
   public void ticketMedioPedidos(String cnpj) {
-    String query = 
-    "select distinct avg(p.valor_final) from pedido p" +
-    "join pedido_refeicao pr on pr.id_pedido = p.id_pedido" +
-    "join refeicao r on r.id_refeicao = pr.id_refeicao" +
-    "join estabelecimento e on e.cnpj = r.cnpj" +
-            "where e.cnpj = '" + cnpj + "'";
+    String query = "select distinct avg(p.valor_final) from pedido p" +
+        "join pedido_refeicao pr on pr.id_pedido = p.id_pedido" +
+        "join refeicao r on r.id_refeicao = pr.id_refeicao" +
+        "join estabelecimento e on e.cnpj = r.cnpj" +
+        "where e.cnpj = '" + cnpj + "'";
     String result = this.executeQuery(query);
     System.out.println("------ Ticked médio dos pedidos do estabelecimento '" + cnpj + "' ------");
     System.out.println(result);
