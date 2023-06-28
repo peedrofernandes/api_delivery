@@ -50,7 +50,7 @@ public class QueryController {
       stmt.setFloat(2, dados.getTaxaDeEntrega());
       stmt.setString(3, dados.getStatus());
       stmt.setString(4, dados.getObservacao());
-      stmt.setInt(5, dados.getCpf());
+      stmt.setLong(5, dados.getCpf());
       stmt.setInt(6, dados.getCodMetodo());
 
       stmt.executeUpdate();
@@ -79,6 +79,12 @@ public class QueryController {
       e.printStackTrace();
       System.exit(1);
     }
+  }
+
+  public void listarPedidos() {
+    String result = this.executeQuery("select * from pedido");
+    System.out.println("------ Lista de pedidos ------");
+    System.out.println(result);
   }
 
   public void listarEstabelecimentos() {

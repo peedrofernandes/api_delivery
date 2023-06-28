@@ -8,7 +8,7 @@ public class PedidoData {
   private Float taxaDeEntrega;
   private String status;
   private String observacao;
-  private int cpf;
+  private long cpf;
   private int codMetodo;
 
   public PedidoData(
@@ -16,7 +16,7 @@ public class PedidoData {
       Float taxaDeEntrega,
       String status,
       String observacao,
-      int cpf,
+      long cpf,
       int codMetodo) {
     this.valorFinal = valorFinal;
     this.taxaDeEntrega = taxaDeEntrega;
@@ -42,7 +42,7 @@ public class PedidoData {
     return observacao;
   }
 
-  public int getCpf() {
+  public long getCpf() {
     return cpf;
   }
 

@@ -7,10 +7,6 @@ import java.util.Scanner;
 
 import io.github.cdimascio.dotenv.Dotenv;
 
-/**
- * Hello world!
- *
- */
 public class App {
   private static Connection establishConnection() {
     Connection connection = null;
@@ -45,14 +41,16 @@ public class App {
     // Objeto que lê valores que o usuário digita na tela
     Scanner scanner = new Scanner(System.in);
 
-    // Estabelece conexão com o banco de dados - O objeto 'connection' contém dados sobre a conexão
+    // Estabelece conexão com o banco de dados - O objeto 'connection' contém dados
+    // sobre a conexão
     // e vai ser usado para fazer consultas e manipulações no banco
     Connection connection = establishConnection();
 
     // Objeto que contém métodos que efetivamente farão as consultas SQL
     QueryController queryController = new QueryController(connection);
 
-    // Objeto que contém métodos que lidarão com a entrada de dados do usuário, passando esses dados
+    // Objeto que contém métodos que lidarão com a entrada de dados do usuário,
+    // passando esses dados
     // para os métodos de QueryController
     APIHandler apiHandler = new APIHandler(queryController, scanner);
 
@@ -70,26 +68,34 @@ public class App {
       System.out.println("[6] Ver o pedido mais caro de um estabelecimento;");
       System.out.println("[7] Obter o ticket médio dos pedidos de um estabelecimento;");
       System.out.println("[0] Encerrar o programa;");
-      System.out.println("Sua opção: ");
+      System.out.print("Sua opção: ");
       op = scanner.nextInt();
+      scanner.nextLine();
 
-      // Cada caso desse switch deverá cobrir um caso de uso do sistema, que corresponderá a um método
+      // Cada caso desse switch deverá cobrir um caso de uso do sistema, que
+      // corresponderá a um método
       // disponível no objeto APIHandler.
       switch (op) {
         case 1: // Inserir um novo pedido
           apiHandler.inserirPedido();
           break;
         case 2: // Inserir um novo estabelecimento
+          apiHandler.inserirEstabelecimento();
           break;
         case 3: // Listar todos os pedidos
+          apiHandler.listarPedidos();
           break;
         case 4: // Listar todos os estabelecimentos
+          apiHandler.listarPedidos();
           break;
         case 5: // Listar todos os usuários
+          apiHandler.listarUsuarios();
           break;
         case 6: // Ver o pedido mais caro de um estabelecimento
+          apiHandler.pedidoMaisCaroDoEstabelecimento();
           break;
         case 7: // Obter o ticket médio dos pedidos de um estabelecimento
+          apiHandler.tickedMedioPedidosDoEstabelecimento();
           break;
         case 0: // Encerrar o programa
           System.out.println("Encerrando o programa, até a próxima.");
