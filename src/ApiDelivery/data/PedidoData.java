@@ -1,4 +1,4 @@
-package udesc.data;
+package ApiDelivery.data;
 
 public class PedidoData {
   // String comandoInsercao = "insert into pedido (id_pedido, valor_final,

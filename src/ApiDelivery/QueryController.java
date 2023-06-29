@@ -1,4 +1,4 @@
-package udesc;
+package ApiDelivery;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -6,8 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import udesc.data.EstabelecimentoData;
-import udesc.data.PedidoData;
+import ApiDelivery.data.EstabelecimentoData;
+import ApiDelivery.data.PedidoData;
 
 public class QueryController {
   private Connection connection;
@@ -83,50 +83,50 @@ public class QueryController {
 
   public void listarPedidos() {
     String result = this.executeQuery("select * from pedido");
-    System.out.println("------ Lista de pedidos ------");
+    System.out.println("\n------ Lista de pedidos ------");
     System.out.println(result);
   }
 
   public void listarEstabelecimentos() {
     String result = this.executeQuery("select * from estabelecimento");
-    System.out.println("------ Lista de estabelecimentos ------");
+    System.out.println("\n------ Lista de estabelecimentos ------");
     System.out.println(result);
   }
 
   public void listarUsuarios() {
     String result = this.executeQuery("select * from usuario");
-    System.out.println("------ Lista de usuários ------");
+    System.out.println("\n------ Lista de usuários ------");
     System.out.println(result);
   }
 
   public void listarRefeicoesDoEstabelecimento(String cnpj) {
     String result = this.executeQuery("select * from refeicao where cnpj = '" + cnpj + "'");
-    System.out.println("------ Lista de refeicoes do estabelecimento com cnpj " + cnpj + " ------");
+    System.out.println("\n------ Lista de refeicoes do estabelecimento com cnpj " + cnpj + " ------");
     System.out.println(result);
   }
 
   public void pedidoMaisCaro(String cnpj) {
-    String query = "select p.id_pedido, p.valor_final from pedido p" +
+    String query = "select p.id_pedido, p.valor_final from pedido p " +
         "where p.valor_final in (" +
-        "select max(p.valor_final) from pedido p" +
-        "join pedido_refeicao pr on pr.id_pedido = p.id_pedido" +
-        "join refeicao r on r.id_refeicao = pr.id_refeicao" +
-        "join estabelecimento e on e.cnpj = r.cnpj" +
+        "select max(p.valor_final) from pedido p " +
+        "join pedido_refeicao pr on pr.id_pedido = p.id_pedido " +
+        "join refeicao r on r.id_refeicao = pr.id_refeicao " +
+        "join estabelecimento e on e.cnpj = r.cnpj " +
         "where e.cnpj = '" + cnpj + "'" +
         ")";
     String result = this.executeQuery(query);
-    System.out.println("------ Pedido mais caro do estabelecimento '" + cnpj + "' ------");
+    System.out.println("\n------ Pedido mais caro do estabelecimento '" + cnpj + "' ------");
     System.out.println(result);
   }
 
   public void ticketMedioPedidos(String cnpj) {
-    String query = "select distinct avg(p.valor_final) from pedido p" +
-        "join pedido_refeicao pr on pr.id_pedido = p.id_pedido" +
-        "join refeicao r on r.id_refeicao = pr.id_refeicao" +
-        "join estabelecimento e on e.cnpj = r.cnpj" +
+    String query = "select distinct avg(p.valor_final) from pedido p " +
+        "join pedido_refeicao pr on pr.id_pedido = p.id_pedido " +
+        "join refeicao r on r.id_refeicao = pr.id_refeicao " +
+        "join estabelecimento e on e.cnpj = r.cnpj " +
         "where e.cnpj = '" + cnpj + "'";
     String result = this.executeQuery(query);
-    System.out.println("------ Ticked médio dos pedidos do estabelecimento '" + cnpj + "' ------");
+    System.out.println("\n------ Ticket médio dos pedidos do estabelecimento '" + cnpj + "' ------");
     System.out.println(result);
   }
 

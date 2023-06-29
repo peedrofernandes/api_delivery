@@ -1,4 +1,4 @@
-package udesc.data;
+package ApiDelivery.data;
 
 public class EstabelecimentoData {
   private String cnpj;

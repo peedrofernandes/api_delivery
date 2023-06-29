@@ -1,9 +1,9 @@
-package udesc;
+package ApiDelivery;
 
 import java.util.Scanner;
 
-import udesc.data.EstabelecimentoData;
-import udesc.data.PedidoData;
+import ApiDelivery.data.EstabelecimentoData;
+import ApiDelivery.data.PedidoData;
 
 public class APIHandler {
   private QueryController queryController;
@@ -73,7 +73,7 @@ public class APIHandler {
   }
 
   public void listarRefeicoesDoEstabelecimento() {
-    System.out.println("CNPJ do estabelecimento: ");
+    System.out.print("CNPJ do estabelecimento: ");
     String cnpj = this.scanner.nextLine();
 
     this.queryController.listarRefeicoesDoEstabelecimento(cnpj);
@@ -81,14 +81,14 @@ public class APIHandler {
 
   // Consultas especiais
   public void pedidoMaisCaroDoEstabelecimento() {
-    System.out.println("CNPJ do estabelecimento: ");
+    System.out.print("CNPJ do estabelecimento: ");
     String cnpj = this.scanner.nextLine();
 
     this.queryController.pedidoMaisCaro(cnpj);
   }
 
-  public void tickedMedioPedidosDoEstabelecimento() {
-    System.out.println("CNPJ do estabelecimento: ");
+  public void ticketMedioPedidosDoEstabelecimento() {
+    System.out.print("CNPJ do estabelecimento: ");
     String cnpj = this.scanner.nextLine();
 
     this.queryController.ticketMedioPedidos(cnpj);

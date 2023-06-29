@@ -1,4 +1,4 @@
-package udesc;
+package ApiDelivery;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -86,7 +86,7 @@ public class App {
           apiHandler.listarPedidos();
           break;
         case 4: // Listar todos os estabelecimentos
-          apiHandler.listarPedidos();
+          apiHandler.listarEstabelecimentos();
           break;
         case 5: // Listar todos os usuários
           apiHandler.listarUsuarios();
@@ -95,10 +95,11 @@ public class App {
           apiHandler.pedidoMaisCaroDoEstabelecimento();
           break;
         case 7: // Obter o ticket médio dos pedidos de um estabelecimento
-          apiHandler.tickedMedioPedidosDoEstabelecimento();
+          apiHandler.ticketMedioPedidosDoEstabelecimento();
           break;
         case 0: // Encerrar o programa
           System.out.println("Encerrando o programa, até a próxima.");
+          break;
         default:
           System.out.println("Opção inválida, tente novamente!");
           break;
